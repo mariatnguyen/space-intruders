@@ -1,0 +1,53 @@
+.instructions {
+  text-align: center;
+  color: #fff;
+  padding: 40px 10px 10px 10px;
+  display: none;
+  visibility: hidden;
+}
+.instructions.show {
+  display: block;
+  visibility: visible;
+}
+.instructions__header {
+  font-size: 30px;
+}
+.instructions__points,
+.instructions__keyboard {
+  font-size: 14px;
+}
+.instructions__keyboard {
+  padding-top: 30px;
+  color: lime;
+}
+.instructions__button {
+  padding-top: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.instructions__credits {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  font-size: 10px;
+  color: #fff;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.instructions__credits a {
+  font-size: 10px;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.5;
+}
+.instructions__close {
+  position: absolute;
+  font-size: 20px;
+  top: 20px;
+  right: 25px;
+  cursor: pointer;
+}

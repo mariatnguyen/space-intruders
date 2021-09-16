@@ -1,0 +1,11 @@
+.game {
+  position: relative;
+  margin: auto;
+  height: 400px;
+  width: 500px;
+  min-height: 400px;
+  min-width: 500px;
+  background-color: #000;
+  border: 0.5px solid #fff;
+  z-index: 1;
+}

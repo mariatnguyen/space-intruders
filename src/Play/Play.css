@@ -1,0 +1,39 @@
+.play {
+  padding: 10px;
+  display: none;
+  visibility: hidden;
+}
+.play.show {
+  display: block;
+  visibility: visible;
+}
+.play__board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #ffffff;
+}
+.play__board-score,
+.play__board-lives {
+  width: 225px;
+}
+.play__barriers-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  width: 300px;
+  height: 31px;
+  bottom: 30px;
+  right: 50%;
+  transform: translate(50%,-50%);
+  margin: auto;
+}
+.play__player-area {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  bottom: 10px;
+}
+/**#32CD32**/

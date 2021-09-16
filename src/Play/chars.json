@@ -1,0 +1,21 @@
+{
+    "blaster": {
+        "src":"/images/blaster.svg"
+    },
+    "alien1": {
+        "src":"/images/alien1.svg",
+        "points":10
+    },
+    "alien2": {
+        "src":"/images/alien2.svg",
+        "points":20
+    },
+    "alien3": {
+        "src":"/images/alien3.svg",
+        "points":30
+    },
+    "ufo": {
+        "src":"/images/ufo.svg",
+        "points":100
+    }
+}
