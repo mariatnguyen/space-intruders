@@ -36,4 +36,60 @@
   height: 20px;
   bottom: 10px;
 }
+.play__intruders-area {
+  padding-top: 20px;
+}
+.play__row1,
+.play__row2,
+.play__row3 {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+.alien {
+  position: relative;
+  width: 25px;
+  height: 25px;
+}
+.alien img:nth-of-type(1) {
+  position: absolute;
+  bottom: 0px;
+  animation-name: alienFadeIn;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.alien img:nth-of-type(2) {
+  position: absolute;
+  bottom: 0px;
+  animation-name: alienFadeOut;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.laser {
+  position: relative;
+  width: 2px;
+  height: 10px;
+  margin-left: 14px;
+  margin-top: -35px;
+  background-color: #ffffff;
+}
 /**#32CD32**/
+
+
+@keyframes alienFadeIn {
+  0%   {opacity: 0;}
+  49% { opacity: 0;}
+  50% { opacity: 1;}
+  100% {opacity: 1}
+}
+
+@keyframes alienFadeOut {
+  0%   {opacity: 1;}
+  49% { opacity: 1;}
+  50% { opacity: 0;}
+  100% {opacity: 0}
+}
