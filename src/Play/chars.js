@@ -1,24 +1,24 @@
 const chars = {
     "blaster": {
-        "src":"/images/blaster.svg"
+        "src":"./images/blaster.svg"
     },
     "alien1": {
-        "src":"/images/alien1.svg",
-        "src-open":"/images/alien1-open.svg",
+        "src":"./images/alien1.svg",
+        "src-open":"./images/alien1-open.svg",
         "points":10
     },
     "alien2": {
-        "src":"/images/alien2.svg",
-        "src-open":"/images/alien2-open.svg",
+        "src":"./images/alien2.svg",
+        "src-open":"./images/alien2-open.svg",
         "points":20
     },
     "alien3": {
-        "src":"/images/alien3.svg",
-        "src-open":"/images/alien3-open.svg",
+        "src":"./images/alien3.svg",
+        "src-open":"./images/alien3-open.svg",
         "points":30
     },
     "ufo": {
-        "src":"/images/ufo.svg",
+        "src":"./images/ufo.svg",
         "points":100
     }
 }
