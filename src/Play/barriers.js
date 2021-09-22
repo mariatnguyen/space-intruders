@@ -1,4 +1,4 @@
-{
+const barriers = {
     "barrier1": {
         "src":"/images/barrier1.svg"
     },
@@ -18,3 +18,5 @@
         "src":"/images/barrier6.svg"
     }
 }
+
+export default barriers;

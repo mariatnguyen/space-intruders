@@ -1,4 +1,4 @@
-{
+const chars = {
     "blaster": {
         "src":"/images/blaster.svg"
     },
@@ -22,3 +22,5 @@
         "points":100
     }
 }
+
+export default chars;

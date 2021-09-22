@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
-import chars from './chars.json';
-import barriers from './barriers.json';
+import chars from './chars.js';
+import barriers from './barriers.js';
 import './Play.css';
 
 class Play extends PureComponent {
