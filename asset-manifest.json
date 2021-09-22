@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/space-intruders/static/css/main.d16bee02.chunk.css",
-    "main.js": "/space-intruders/static/js/main.df2c6263.chunk.js",
-    "main.js.map": "/space-intruders/static/js/main.df2c6263.chunk.js.map",
+    "main.js": "/space-intruders/static/js/main.05bcc401.chunk.js",
+    "main.js.map": "/space-intruders/static/js/main.05bcc401.chunk.js.map",
     "runtime-main.js": "/space-intruders/static/js/runtime-main.66bd7ee7.js",
     "runtime-main.js.map": "/space-intruders/static/js/runtime-main.66bd7ee7.js.map",
     "static/js/2.6b7493a2.chunk.js": "/space-intruders/static/js/2.6b7493a2.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.66bd7ee7.js",
     "static/js/2.6b7493a2.chunk.js",
     "static/css/main.d16bee02.chunk.css",
-    "static/js/main.df2c6263.chunk.js"
+    "static/js/main.05bcc401.chunk.js"
   ]
 }
