@@ -7,25 +7,27 @@ class Play extends PureComponent {
   constructor(props) {
     super(props);
     this.updateBarriers = this.updateBarriers.bind(this);
+    //this.updateAliens = this.updateAliens.bind(this);
     this.state = {
       barriers: [1, 1, 1],
-      aliens: [[1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1]]
+      aliens: [[1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      distance: 50
     }
   }
 
   componentDidMount() {
+    this.addAliens();
     this.movePlayer();
-    this.updateAliens();
   }
 
-  updateAliens() {
+  addAliens() {
     let row1 = document.createElement("div");
     row1.className = "play__row1";
-    for(let i = 0; i < this.state.aliens[0].length; i++) { 
+    for (let i = 0; i < this.state.aliens[0].length; i++) {
       let alien = document.createElement("div");
       alien.className = "alien";
       row1.append(alien);
-      if(this.state.aliens[0][i]) {
+      if (this.state.aliens[0][i]) {
         let image = document.createElement("img");
         image.src = chars.alien1.src;
         alien.append(image);
@@ -36,14 +38,13 @@ class Play extends PureComponent {
     }
     document.querySelector('.play__intruders-area').append(row1);
 
-
     let row2 = document.createElement("div");
     row2.className = "play__row2";
-    for(let i = 0; i < this.state.aliens[1].length; i++) { 
+    for (let i = 0; i < this.state.aliens[1].length; i++) {
       let alien = document.createElement("div");
       alien.className = "alien";
       row2.append(alien);
-      if(this.state.aliens[1][i]) {
+      if (this.state.aliens[1][i]) {
         let image = document.createElement("img");
         image.src = chars.alien2.src;
         alien.append(image);
@@ -54,14 +55,13 @@ class Play extends PureComponent {
     }
     document.querySelector('.play__intruders-area').append(row2);
 
-
     let row3 = document.createElement("div");
     row3.className = "play__row3";
-    for(let i = 0; i < this.state.aliens[2].length; i++) { 
+    for (let i = 0; i < this.state.aliens[2].length; i++) {
       let alien = document.createElement("div");
       alien.className = "alien";
       row3.append(alien);
-      if(this.state.aliens[2][i]) {
+      if (this.state.aliens[2][i]) {
         let image = document.createElement("img");
         image.src = chars.alien3.src;
         alien.append(image);
@@ -71,9 +71,19 @@ class Play extends PureComponent {
       }
     }
     document.querySelector('.play__intruders-area').append(row3);
+
+    document.querySelector('.play__intruders-area').style.top = this.state.distance + "px";
   }
 
   updateBarriers() {
+  }
+
+  updateAliens() {
+      this.setState(
+        {
+          aliens: [0]
+        }
+      )
   }
 
   movePlayer() {
@@ -82,7 +92,7 @@ class Play extends PureComponent {
     window.addEventListener('load', () => {
       player.style.position = 'absolute';
       player.style.left = 0;
-      player.style.top = 0;
+      player.style.top = "320px";
     });
     window.addEventListener('keydown', (e) => {
       switch (e.key) {
@@ -98,16 +108,46 @@ class Play extends PureComponent {
           let laser = document.createElement("div");
           laser.className = "laser";
           laser.style.left = player.style.left;
+          laser.style.top = "320px";
           document.querySelector('.play__player-area').appendChild(laser);
-          /*let position = 0;
 
-          let aim = setInterval(shootLaser, 1000);
+          let aim = setInterval(shootLaser, 100);
+          let decrement = 320;
+          let aliens = this.state.aliens;
+          let bottomOfIntrudersArea = this.state.distance + 70;
 
+          let alienPositions = {"0px":1, "40px":2, "60px":2, "100px":3, "160px":4, "220px":5, "260px":6, "280px":7, "320px":7, "380px":8, "420px":9, "440px":10};
+          
           function shootLaser() {
-            if(player.style.left === "0px") {
-              clearInterval(aim);
+            decrement -= 10;
+            laser.style.top = decrement + 'px';
+            if (laser.style.left in alienPositions) {
+              switch (true) {
+                case (aliens[0][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 80)):
+                  console.log("first");
+                  clearInterval(aim);
+                  laser.remove();
+                  break;
+                case (aliens[1][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 35)):
+                  console.log("second");
+                  clearInterval(aim);
+                  laser.remove();
+                  break;
+                case (aliens[2][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea)):
+                  console.log("third");
+                  clearInterval(aim);
+                  laser.remove();
+                  break;
+                  // no default
+              }
+              //this.updateAliens();
+              //
             }
-          }*/
+            if (parseInt(laser.style.top) <= 0) {
+              clearInterval(aim);
+              laser.remove();
+            }
+          }
           break;
         default:
           break;

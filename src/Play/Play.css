@@ -1,7 +1,12 @@
 .play {
-  padding: 10px;
   display: none;
   visibility: hidden;
+  position:relative;
+  height: 400px;
+  width: 500px;
+  min-height: 400px;
+  min-width: 500px;
+  padding: 20px;
 }
 .play.show {
   display: block;
@@ -11,33 +16,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
   color: #ffffff;
 }
 .play__board-score,
 .play__board-lives {
   width: 225px;
 }
-.play__barriers-area {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: absolute;
-  width: 300px;
-  height: 31px;
-  bottom: 30px;
-  right: 50%;
-  transform: translate(50%,-50%);
-  margin: auto;
-}
-.play__player-area {
-  display: block;
+.play__intruders-area {
   position: absolute;
   width: 100%;
-  height: 20px;
-  bottom: 10px;
-}
-.play__intruders-area {
-  padding-top: 20px;
+  left: 0;
+  padding: 0 20px 0 20px;
 }
 .play__row1,
 .play__row2,
@@ -57,7 +47,7 @@
   position: absolute;
   bottom: 0px;
   animation-name: alienFadeIn;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
@@ -65,28 +55,49 @@
   position: absolute;
   bottom: 0px;
   animation-name: alienFadeOut;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
-.laser {
+.play__barriers-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  width: 300px;
+  height: 31px;
+  bottom: 40px;
+  right: 50%;
+  transform: translate(50%,-50%);
+  margin: auto;
+}
+.play__player-area {
+  display: block;
   position: relative;
+  height: 400px;
+  width: 500px;
+  min-height: 400px;
+  min-width: 500px;
+}
+.play__player {
+  position: absolute;
+  top: 320px;
+  z-index: 1;
+}
+.laser {
+  position: absolute;
   width: 2px;
   height: 10px;
   margin-left: 14px;
-  margin-top: -35px;
   background-color: #ffffff;
 }
 /**#32CD32**/
-
-
 @keyframes alienFadeIn {
   0%   {opacity: 0;}
   49% { opacity: 0;}
   50% { opacity: 1;}
   100% {opacity: 1}
 }
-
 @keyframes alienFadeOut {
   0%   {opacity: 1;}
   49% { opacity: 1;}

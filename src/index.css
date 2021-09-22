@@ -7,3 +7,6 @@ body {
     background-color: #000;
     font-family: Tahoma, sans-serif;
 }
+* {
+    box-sizing: border-box;
+}
