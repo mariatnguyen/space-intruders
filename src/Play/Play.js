@@ -111,31 +111,28 @@ class Play extends PureComponent {
           laser.style.top = "320px";
           document.querySelector('.play__player-area').appendChild(laser);
 
-          let aim = setInterval(shootLaser, 100);
+          let aim;
           let decrement = 320;
           let aliens = this.state.aliens;
           let bottomOfIntrudersArea = this.state.distance + 70;
 
           let alienPositions = {"0px":1, "40px":2, "60px":2, "100px":3, "160px":4, "220px":5, "260px":6, "280px":7, "320px":7, "380px":8, "420px":9, "440px":10};
           
-          function shootLaser() {
+          function moveLaser() {
             decrement -= 10;
             laser.style.top = decrement + 'px';
             if (laser.style.left in alienPositions) {
               switch (true) {
                 case (aliens[0][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 80)):
-                  console.log("first");
-                  clearInterval(aim);
+                  stopLaser();
                   laser.remove();
                   break;
                 case (aliens[1][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 35)):
-                  console.log("second");
-                  clearInterval(aim);
+                  stopLaser();
                   laser.remove();
                   break;
                 case (aliens[2][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea)):
-                  console.log("third");
-                  clearInterval(aim);
+                  stopLaser();
                   laser.remove();
                   break;
                   // no default
@@ -144,10 +141,23 @@ class Play extends PureComponent {
               //
             }
             if (parseInt(laser.style.top) <= 0) {
-              clearInterval(aim);
+              stopLaser();
               laser.remove();
             }
           }
+
+          function shootLaser() {
+            aim = setInterval(moveLaser,100)
+          }
+
+          function stopLaser() {
+            clearInterval(aim);
+          }
+          
+          shootLaser();
+
+          console.log(laser.style.left);
+
           break;
         default:
           break;
