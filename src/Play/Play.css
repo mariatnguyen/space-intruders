@@ -22,12 +22,17 @@
 .play__board-score,
 .play__board-lives {
   width: 225px;
+  font-size: 16px;
 }
 .play__intruders-area {
   position: absolute;
-  width: 100%;
-  left: 0;
+  width: 380px;
   padding: 0 20px 0 20px;
+  animation-name: alienMove;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: linear;
 }
 .play__row1,
 .play__row2,
@@ -89,18 +94,22 @@
   width: 2px;
   height: 10px;
   margin-left: 14px;
-  background-color: #ffffff;
+  background-color: limegreen;
 }
-/**#32CD32**/
 @keyframes alienFadeIn {
   0%   {opacity: 0;}
   49% { opacity: 0;}
   50% { opacity: 1;}
-  100% {opacity: 1}
+  100% {opacity: 1;}
 }
 @keyframes alienFadeOut {
   0%   {opacity: 1;}
   49% { opacity: 1;}
   50% { opacity: 0;}
-  100% {opacity: 0}
+  100% {opacity: 0;}
+}
+@keyframes alienMove {
+  0%   {left: 0px;}
+  50% { left: 120px;}
+  100% {left: 0px;}
 }

@@ -7,20 +7,51 @@ class Play extends PureComponent {
   constructor(props) {
     super(props);
     this.updateBarriers = this.updateBarriers.bind(this);
-    //this.updateAliens = this.updateAliens.bind(this);
+    this.updateAliens = this.updateAliens.bind(this);
     this.state = {
-      barriers: [1, 1, 1],
-      aliens: [[1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      distance: 50
+      barrier: [1, 1, 1],
+      aliens: [[1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1]],
+      distanceTop: 50,
+      distanceLeft: 0
     }
   }
+
+  /*moveAliens() {
+    document.querySelector('.play__intruders-area').style.top = this.state.distanceTop + "px";
+    document.querySelector('.play__intruders-area').style.left = this.state.distanceLeft + "px";
+
+    let direction = 10;
+
+    if(this.state.distanceLeft > 100) {
+      direction = -10;
+    } else if (this.state.distanceLeft < 0) {
+      direction = 10;
+    }
+
+    this.setState((prevState) => (
+      {
+        distanceLeft: prevState.distanceLeft += direction
+      })
+    );
+    
+    document.querySelector('.play__intruders-area').offsetLeft
+  }*/
 
   componentDidMount() {
     this.addAliens();
     this.movePlayer();
+    this.moveAliens();
+    
+   //this.interval = setInterval(() => this.moveAliens(), 1000);
   }
 
+  /*componentWillUnmount() {
+    clearInterval(this.interval);
+  }*/
+
   addAliens() {
+    document.querySelector('.play__intruders-area').innerHTML = "";
+
     let row1 = document.createElement("div");
     row1.className = "play__row1";
     for (let i = 0; i < this.state.aliens[0].length; i++) {
@@ -71,19 +102,34 @@ class Play extends PureComponent {
       }
     }
     document.querySelector('.play__intruders-area').append(row3);
-
-    document.querySelector('.play__intruders-area').style.top = this.state.distance + "px";
   }
 
-  updateBarriers() {
+  moveAliens() {
+    document.querySelector('.play__intruders-area').style.top = this.state.distanceTop + "px";
+    document.querySelector('.play__intruders-area').style.left = this.state.distanceLeft + "px";
   }
 
-  updateAliens() {
+  updateBarriers(column) {
+    let newBarriers = [...this.state.barrier];
+    newBarriers[column] = newBarriers[column] + 1
+    this.setState(
+      {
+        barrier: newBarriers
+      }
+    )
+  }
+
+  updateAliens(row, column) {
+    if (typeof row !== 'undefined' && !Number.isNaN(column)) {
+      let newAliens = [...this.state.aliens];
+      newAliens[row][column] = 0;
       this.setState(
         {
-          aliens: [0]
+          aliens: newAliens
         }
       )
+      this.addAliens();
+    }
   }
 
   movePlayer() {
@@ -114,49 +160,77 @@ class Play extends PureComponent {
           let aim;
           let decrement = 320;
           let aliens = this.state.aliens;
-          let bottomOfIntrudersArea = this.state.distance + 70;
+          let barrier = this.state.barrier;
+          let bottomOfIntrudersArea = this.state.distanceTop + 70;
+          let calcLeft = (parseInt(laser.style.left) - this.state.distanceLeft) + "px";
+          let updateAliens = this.updateAliens;
+          let updateBarriers = this.updateBarriers;
+          let updateScore = this.props.updateScore;
+          let row;
 
-          let alienPositions = {"0px":1, "40px":2, "60px":2, "100px":3, "160px":4, "220px":5, "260px":6, "280px":7, "320px":7, "380px":8, "420px":9, "440px":10};
-          
+          let alienIndex = { "0px": 0, "40px": 1, "60px": 1, "100px": 2, "140px": 3, "160px": 3, "200px": 4, "240px": 5, "260px": 5, "300px": 6, "340px": 7, "360px": 7 };
+          let barrierIndex = { "80px": 0, "100px": 0, "200px": 1, "220px": 1, "320px": 2, "340px": 2, "360px": 2 };
+
+          //console.log(Math.ceil(document.querySelector('.play__intruders-area').offsetLeft / 10) * 10);
+
           function moveLaser() {
             decrement -= 10;
             laser.style.top = decrement + 'px';
-            if (laser.style.left in alienPositions) {
-              switch (true) {
-                case (aliens[0][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 80)):
-                  stopLaser();
+            switch (true) {
+              case (laser.style.left in barrierIndex) && (barrier[barrierIndex[laser.style.left]] <= 5):
+                if (parseInt(laser.style.top) < 300) {
+                  hitBarrier(barrierIndex[laser.style.left]);
                   laser.remove();
-                  break;
-                case (aliens[1][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 35)):
-                  stopLaser();
-                  laser.remove();
-                  break;
-                case (aliens[2][(alienPositions[laser.style.left]) - 1] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea)):
-                  stopLaser();
-                  laser.remove();
-                  break;
+                }
+                break;
+              case calcLeft in alienIndex:
+                switch (true) {
+                  case (aliens[0][alienIndex[calcLeft]] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 80)):
+                    row = 0;
+                    hitAlien();
+                    laser.remove();
+                    break;
+                  case (aliens[1][alienIndex[calcLeft]] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea - 35)):
+                    row = 1;
+                    hitAlien();
+                    laser.remove();
+                    break;
+                  case (aliens[2][alienIndex[calcLeft]] === 1) && (parseInt(laser.style.top) < (bottomOfIntrudersArea)):
+                    row = 2;
+                    hitAlien();
+                    laser.remove();
+                    break;
+                  case parseInt(laser.style.top) <= 0:
+                    hitAlien();
+                    laser.remove();
+                    break;
                   // no default
-              }
-              //this.updateAliens();
-              //
-            }
-            if (parseInt(laser.style.top) <= 0) {
-              stopLaser();
-              laser.remove();
+                }
+                break;
+              case parseInt(laser.style.top) <= 0:
+                hitAlien();
+                laser.remove();
+                break;
+                // no default
             }
           }
 
           function shootLaser() {
-            aim = setInterval(moveLaser,100)
+            aim = setInterval(moveLaser, 100);
           }
 
-          function stopLaser() {
+          function hitBarrier() {
             clearInterval(aim);
+            updateBarriers(barrierIndex[laser.style.left]);
           }
-          
-          shootLaser();
 
-          console.log(laser.style.left);
+          function hitAlien() {
+            clearInterval(aim);
+            updateAliens(row, alienIndex[laser.style.left]);
+            updateScore(row, alienIndex[laser.style.left]);
+          }
+
+          shootLaser();
 
           break;
         default:
@@ -183,7 +257,7 @@ class Play extends PureComponent {
           <div className="play__barrier">
             <img
               id="barrier1"
-              src={barriers['barrier' + this.state.barriers[0]].src}
+              src={barriers['barrier' + this.state.barrier[0]].src}
               width="50"
               height="31"
               alt="barrier"
@@ -192,7 +266,7 @@ class Play extends PureComponent {
           <div className="play__barrier">
             <img
               id="barrier2"
-              src={barriers['barrier' + this.state.barriers[1]].src}
+              src={barriers['barrier' + this.state.barrier[1]].src}
               width="50"
               height="31"
               alt="barrier"
@@ -201,7 +275,7 @@ class Play extends PureComponent {
           <div className="play__barrier">
             <img
               id="barrier3"
-              src={barriers['barrier' + this.state.barriers[2]].src}
+              src={barriers['barrier' + this.state.barrier[2]].src}
               width="50"
               height="31"
               alt="barrier"

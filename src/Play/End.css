@@ -1,34 +1,53 @@
-.start {
+.end {
+  display: none;
+  visibility: hidden;
+  position:relative;
+  height: 400px;
+  width: 500px;
+  min-height: 400px;
+  min-width: 500px;
+  padding: 20px;
   text-align: center;
-  color: #fff;
-  padding: 40px 10px 10px 10px;
+  color: #ffffff;
+}
+.end.show {
   display: block;
   visibility: visible;
 }
-.start.hidden {
-  display: none;
-  visibility: hidden;
-}
-.start__header {
+.end__header {
+  margin: 0;
+  padding: 40px 10px 10px 10px;
   font-size: 30px;
 }
-.start__button {
-  margin-top: 50px;
-  padding-top: 30px;
+.end p {
+  font-size: 16px;
+}
+.end__animation {
+  position: relative;
+  height: 14px;
+  margin-top: 40px;
+}
+.end__refresh-button {
+  margin-top: 80px;
+}
+.end__refresh-button a {
   font-size: 20px;
   font-weight: bold;
   color: #fff;
   border: none;
+  text-decoration: none;
   background-color: transparent;
   cursor: pointer;
 }
-.start__button .start__button-alien {
+.end__alien {
   display: inline-block;
   position: relative;
   width: 20px;
   height: 14px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
-.start__button .start__button-alien img:nth-of-type(1) {
+.end__alien img:nth-of-type(1) {
   position: absolute;
   top: 0;
   left: 0;
@@ -37,7 +56,7 @@
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
-.start__button .start__button-alien img:nth-of-type(2) {
+.end__alien img:nth-of-type(2) {
   position: absolute;
   top: 0;
   left: 0;
@@ -46,23 +65,14 @@
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
-.start__credits {
+.end__ufo img {
   position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  padding: 20px;
-  margin: 0;
-  font-size: 10px;
-  color: #fff;
-  opacity: 0.5;
-  cursor: pointer;
-}
-.start__credits a {
-  font-size: 10px;
-  color: #fff;
-  text-decoration: none;
-  opacity: 0.5;
+  left: 180px;
+  animation-name: ufoLeftRight;
+  animation-delay: 1s;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 @keyframes alienFadeIn {
   0%   {opacity: 0;}
@@ -76,20 +86,8 @@
   50% { opacity: 0;}
   100% {opacity: 0}
 }
-.start-mobile.hidden {
-  display: none;
-}
-@media screen and (min-width: 511px) {
-  .start__mobile {
-    display: none;
-  }
-}
-@media screen and (max-width: 510px) {
-  .start__mobile {
-    display: block;
-  }
-  .start__button {
-    display: none;
-    visibility: none;
-  }
+@keyframes ufoLeftRight {
+  0%   {left: 180px;}
+  50% { left: 260px;}
+  100% {left: 180px}
 }

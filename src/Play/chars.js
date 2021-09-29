@@ -5,7 +5,7 @@ const chars = {
     "alien1": {
         "src":"./images/alien1.svg",
         "src-open":"./images/alien1-open.svg",
-        "points":10
+        "points":30
     },
     "alien2": {
         "src":"./images/alien2.svg",
@@ -15,7 +15,7 @@ const chars = {
     "alien3": {
         "src":"./images/alien3.svg",
         "src-open":"./images/alien3-open.svg",
-        "points":30
+        "points":10
     },
     "ufo": {
         "src":"./images/ufo.svg",
